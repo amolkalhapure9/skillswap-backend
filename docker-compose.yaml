@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+    ports:
+      - 3307:3306
+    networks:
+      - mynetwork
+
+  app:
+    build: .
+    container_name: SkillSwap
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+    environment:
+      DB_NAME: mydb
+      DB_USERNAME: root
+      DB_PASSWORD: root
+    networks:
+      - mynetwork
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    restart: always
+
+  redis:
+    image: redis
+    container_name: redis-container
+    ports:
+      - 6379:6379
+    restart: no
+    networks:
+      - mynetwork
+
+
+
+
+
+networks:
+  mynetwork:
+
+
+
