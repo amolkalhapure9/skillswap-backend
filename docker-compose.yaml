@@ -9,7 +9,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: mydb
     ports:
-      - 3307:3306
+      - 3307:3307
     networks:
       - mynetwork
 

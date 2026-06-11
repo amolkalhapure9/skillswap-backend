@@ -52,7 +52,8 @@ public class SpringFilterChain {
                                  "/login",
                                 "/login/**",
                                 "/actuator",
-                                "/actuator/**"
+                                "/actuator/**",
+                                "/ws/**"
                                 )
                                 .permitAll()
                                 .anyRequest()
