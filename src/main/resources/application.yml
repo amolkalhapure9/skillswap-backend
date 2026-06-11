@@ -5,14 +5,14 @@ spring:
     type: redis
   data:
     redis:
-      host: redis-container
+      host: localhost
       port: 6379
   main:
     allow-circular-references: true
   datasource:
-    url: jdbc:mysql://mysql-container:3306/mydb
+    url: jdbc:mysql://localhost:3306/mydb
     username: root
-    password: root
+    password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
   logging:
     level: TRACE

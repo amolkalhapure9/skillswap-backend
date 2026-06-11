@@ -72,7 +72,7 @@ public class ServiceImpl implements UserDetailsService {
         return new User(user.getUserid(), user.getPassword(), List.of(new SimpleGrantedAuthority("Role_"+user.getRole().name())));
     }
 
-    @Cacheable(value="userProfiles", key = "#userid")
+//    @Cacheable(value="userProfiles", key = "#userid")
     public UserProfileDto getUserDetails(String userid){
         UserEntiity entity=repository.findByUserid(userid);
 
@@ -89,7 +89,7 @@ public class ServiceImpl implements UserDetailsService {
 
     }
 
-    @CachePut(value="userProfiles", key="#dto.getUserid()")
+//    @CachePut(value="userProfiles", key="#dto.getUserid()")
     public UserProfileDto updateProfile(UserProfileDto dto){
         UserEntiity entity=repository.findByUserid(dto.getUserid());
         if(entity==null){

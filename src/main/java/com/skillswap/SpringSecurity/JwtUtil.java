@@ -1,5 +1,6 @@
 package com.skillswap.SpringSecurity;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -21,6 +22,19 @@ public class JwtUtil {
     public Key key(){
 
         return Keys.hmacShaKeyFor(key.getBytes(StandardCharsets.UTF_8));
+
+    }
+
+    public String extractUserId(String token){
+
+        Claims claims=Jwts.parserBuilder()
+                .setSigningKey(key())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.getSubject();
+
 
     }
 
