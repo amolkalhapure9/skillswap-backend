@@ -16,11 +16,13 @@ public class MessageService {
     MessageRepository3 messageRepository;
 
     public String  saveMessage(MessageDto dto){
+
+        dto.setSendAt(LocalDateTime.now());
         Message message=new Message();
         message.setSenderId(dto.getSenderId());
         message.setReceiverId(dto.getReceiverId());
         message.setContent(dto.getContent());
-        message.setSendAt(LocalDateTime.now());
+        message.setSendAt(dto.getSendAt());
 
         Message chat=messageRepository.save(message);
 
