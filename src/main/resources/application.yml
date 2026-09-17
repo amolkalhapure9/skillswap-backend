@@ -5,29 +5,33 @@ spring:
     type: redis
   data:
     redis:
-      host: ${redis_host}
-      port:${redis_port}
+      # Format: ${ENV_VAR_NAME:default_value}
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
   main:
     allow-circular-references: true
   datasource:
-    url: ${mysql_url}
-    username: ${mysql_username}
-    password: ${mysql_password}
+    # Full JDBC URL or construct dynamic host/port
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/mydb?useSSL=false&serverTimezone=UTC}
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
-  logging:
-    level: TRACE
 
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      # Allows switching to 'validate' or 'none' in production
+      ddl-auto: ${DDL_AUTO:update}
+    show-sql: ${SHOW_SQL:true}
+
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
 
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-
